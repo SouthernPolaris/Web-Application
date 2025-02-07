@@ -5,21 +5,6 @@ A full-stack web application for managing volunteers, branch operations, and com
 This project was done as a part of a university course - Web and Database Computing
 This was done in a developer team of 4. I was primarily reponsible for the API integration and some backend development.
 
----
-## Installation Guide
-
-```bash
-npm install
-
-service mysql start
-
-mysql < ./sql/database.sql
-mysql < ./sql/testData.sql
-
-npm start
-```
----
-
 ## API Features:
 - NodeMailer
 - Google OAuth
