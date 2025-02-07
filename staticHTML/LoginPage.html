@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <link rel="stylesheet" href="stylesheets/LoginPage.css" />
+    <script src="javascripts/toast.js"></script>
+    <script src="https://kit.fontawesome.com/57bf08c2c0.js" crossorigin="anonymous"></script>
+    <!-- <script src="javascripts/login.js"></script> -->
+  </head>
+
+  <body >
+  <main id="login">
+    <div class="login-container">
+      <div class="login-section">
+        <h1> Have an Account?</h1>
+        <form id="login-form">
+          <input type="email" id="login-email" placeholder="Email" />
+          <input type="password" id="login-password" placeholder="Password" />
+          <button type="submit" id="login-btn">Login</button>
+        </form>
+      </div>
+      <div class="signup-section">
+        <h1>Sign Up</h1>
+        <button type="button" class="social-sign-in" id="Google" onclick="location.href=`http://localhost:8080/users/google`">
+
+          <img src="./images/google.png" alt="gooogle logo"/>
+          Continue With Google
+        </button>
+        <!-- <button type="button" class="social-sign-in" id="Facebook">
+          <img src="./images/facebook.png" alt="facebook-logo" />
+Continue with Facebook
+        </button> -->
+        <div class="divider" >
+          <span>
+
+          </span>
+          <span class="text">
+              Or
+          </span>
+          <span>
+
+          </span>
+
+        </div>
+
+          <form id="signup-form">
+            <input type="text" id="firstName" placeholder="Given Name" />
+            <input type="text" id="lastName" placeholder="Last Name" />
+
+            <input type="email" id="signup-email" placeholder="Email" />
+            <input type="tel" id="phone-number" placeholder="Phone Number" />
+            <input
+              type="password"
+              id="signup-password"
+              placeholder="Password"
+            />
+
+            <button type="submit" id="submit-btn">Sign Up</button>
+            <!-- Additional links -->
+            <div class="additional-links">
+              <a href="./faq.html"
+                >Any questions?<br />
+                Check out FAQs</a
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <div class="toast hide" id="toast">
+
+    </div>
+
+    <script src="javascripts/navigation.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="javascripts/header.js"></script>
+    <script src="javascripts/footer.js"></script>
+    <script src='javascripts/LoginPage.js'></script>
+  </body>
+</html>

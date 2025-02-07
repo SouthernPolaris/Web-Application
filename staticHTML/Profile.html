@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+
+    <script src="javascripts/Modal.js"></script>
+    <link rel="stylesheet" href="stylesheets/Profile.css" />
+    <link rel="stylesheet" href="stylesheets/Modal.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="javascripts/toast.js"></script>
+  </head>
+
+  <body >
+    <div id="profile">
+      <nav class="nav-bar">
+        <a data-id="1" class="nav-item nav first-nav-item active-nav"
+        @click="change(1)" ><span>Personal Information</span></a
+        >
+        <a data-id="2" class="nav-item nav" v-if="role === 'admin'||role==='manager'" @click="change(2)"><span>Manage Users</span></a>
+        <a data-id="3" class="nav-item nav" v-if="role === 'admin'" @click="change(3)"><span>Manage Branches</span></a>
+        <a class="nav-item" @click="logOutConfirm" onclick="openModal('modal-4')"><span>Sign Out</span></a>
+      </nav>
+
+      <main class="profile">
+        <!-- Personal details tab -->
+        <div class="personal-container dash active">
+          <h1>{{ firstName }} {{ lastName }}</h1>
+          <form class="personal" @submit.prevent="submitForm">
+            <div class="form">
+              <div>
+                <label>First Name</label>
+                <input
+                  type="text"
+                  v-model="firstName"
+                  placeholder="First Name"
+                />
+              </div>
+
+              <div>
+                <label>Last Name</label>
+                <input
+                  type="text"
+                  v-model="lastName"
+                  placeholder="Last Name"
+                />
+              </div>
+
+              <div>
+                <label>Phone Number</label>
+                <input
+                  type="tel"
+                  v-model="phoneNumber"
+                  placeholder="Phone Number"
+                />
+              </div>
+
+              <div>
+                <label>Email Address</label>
+                <input
+                  type="email"
+                  v-model="email"
+                  placeholder="Email"
+                />
+              </div>
+              <button type="submit">Save changes</button>
+              <button type="button" class="red"  @click="deleteSelf" onclick="openModal('modal-4')">Delete Account</button>
+
+            </div>
+            <div>
+              <h2>Email Notification Preferences</h2>
+
+              <div class="email-pref">
+                <div>
+                  <input type="checkbox" v-model="emailNotif" id="event" />
+                  <label for="event">Events</label>
+                </div>
+                <div>
+                  <input type="checkbox"  v-model="eventNotif" id="news" />
+                  <label for="news">News</label>
+                </div>
+
+              </div>
+
+                    <button type="submit" class="submit">Save changes</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Manager tab -->
+
+        <div class="manage-user dash">
+          <div>
+
+            <div v-if="role==='admin'">
+              <label for="branch-dropdown">Select a Branch:</label>
+              <select id="branch-dropdown" v-model="selectedBranch" @change="handleBranchChange">
+                <option value="" disabled>Select a branch</option>
+                <option
+                  v-for="branch in branches"
+                  :key="branch.BranchID"
+                  :value="branch.BranchID"
+                  :selected="selectedBranch === branch.BranchID"
+                >
+                  {{ branch.name }} - {{ branch.address.city }}
+                </option>
+              </select>
+            </div>
+
+            <form @submit.prevent="searchUsers">
+            <div class="wrapper">
+              <input
+                type="text"
+                class="search-input"
+                v-model="userSearch"
+                placeholder="Search Users"
+              />
+              <button type="submit" class="search-icon" ><i class="fa fa-search"></i></button>
+            </div>
+          </form>
+
+
+        </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Type</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(user, index) in users" :key="index">
+                <td>{{ user.GivenName+" " + user.LastName }}</td>
+                <td>{{ user.EmailAddress }}</td>
+                <td>{{ user.PhoneNumber }}</td>
+                <td>{{user.UserType}}</td>
+                <td>
+                  <button
+                    type="button"
+                    class="edit-btn"
+                    @click="editUser(index)"
+                    v-if="role==='admin'"
+
+                    onclick="openModal('modal-3')"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    class="delete-btn"
+                    @click="deleteUserConfirm(index)"
+                    v-if="role==='admin'"
+                    onclick="openModal('modal-4')"
+                  >
+                    Delete
+                  </button>
+
+                  <button
+                  type="button"
+                  class="delete-btn"
+                  @click="removeFromBranchConfirm(index)"
+                  v-if="role==='manager'"
+                  onclick="openModal('modal-4')"
+                >
+                Remove from Branch
+              </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- branch management dash -->
+        <div class="manage-branch dash">
+          <div>
+            <button type="button" @click="resetForm" onclick="openModal('modal-1')">
+              Create New Branch
+            </button>
+            </div>
+          <form @submit.prevent="searchBranches">
+            <div class="wrapper">
+              <input
+                type="text"
+                class="search-input"
+                v-model="branchSearch"
+                placeholder="Search Branches"
+              />
+              <button type="submit" class="search-icon" ><i class="fa fa-search"></i></button>
+            </div>
+          </form>
+
+
+          <table>
+            <thead>
+              <tr>
+                <th>Branch Name</th>
+                <th>State</th>
+                <th>Address</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(branch, index) in branches" :key="index">
+                <td>{{branch.name}}</td>
+                <td>{{branch.address.state}}</td>
+                <td>{{branch.address.houseNumber +" "+branch.address.streetName}}</td>
+                <td>
+                  <button
+                    type="button"
+                    class="edit-btn"
+                    @click="editBranch(index)"
+                    onclick="openModal('modal-2')"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    class="delete-btn"
+                    @click="deleteBranchConfirm(index)"
+                    onclick="openModal('modal-4')"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+      <div id="modal-1" class="modal">
+        <div class="modal-body">
+          <div class="modal-header">
+            <h3>Publish Branch</h3>
+            <button type="button" onclick="closeModal()">&cross;</button>
+          </div>
+
+          <div class="modal-content">
+            <form >
+              <div class="input-one">
+                <label for="name-input">Branch Name</label>
+                <input type="text" id="name-input" v-model="branch.name" />
+              </div>
+
+
+
+              <div class="input-one">
+                <label for="adress-input">Address  Number</label>
+                <input type="text" id="adress-input" v-model="branch.housenumber" />
+              </div>
+              <div class="input-one">
+                <label for="adress-input">Address Street</label>
+                <input type="text" id="adress2-input" v-model="branch.address" />
+              </div>
+
+
+
+              <div class="input-one">
+                <label for="city-input">City</label>
+                <input type="text" id="city-input" v-model="branch.city" />
+              </div>
+
+              <div class="input-one">
+                <label for="state-input">State</label>
+                <input type="text" id="state-input" v-model="branch.state" />
+              </div>
+
+              <div class="input-one">
+                <label for="postcode-input">Postcode</label>
+                <input type="text" id="postcode-input" v-model="branch.postcode" />
+              </div>
+
+              <div class="input-one">
+                <label for="phone-input">Phone Number</label>
+                <input type="tel" id="phone-input" v-model="branch.phone" />
+              </div>
+
+              <div class="input-one">
+                <label for="email-input">Email Address</label>
+                <input type="email" id="email-input" v-model="branch.email" />
+              </div>
+
+              <div class="submit-btn-cont" >
+                <button type="button" class="submit-btn"  @click="createBranch" onclick="closeModal()">Create Branch</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div id="modal-2" class="modal">
+        <div class="modal-body">
+          <div class="modal-header">
+            <h3>Edit Branch</h3>
+            <button type="button" onclick="closeModal()">&cross;</button>
+          </div>
+
+          <div class="modal-content">
+            <form >
+              <div class="input-one">
+                <label for="name-input">Branch Name</label>
+                <input type="text" id="name-input-edit" v-model="branch.name" />
+              </div>
+
+              <div class="input-one">
+                <label for="adress-input">Address</label>
+                <input type="text" id="adress-input-edit-2" v-model="branch.address" />
+              </div>
+
+              <div class="input-one">
+                <label for="adress-input">Address</label>
+                <input type="text" id="adress-input-edit" v-model="branch.housenumber" />
+              </div>
+
+
+
+              <div class="input-one">
+                <label for="city-input">City</label>
+                <input type="text" id="city-input-edit" v-model="branch.city" />
+              </div>
+
+              <div class="input-one">
+                <label for="state-input">State</label>
+                <input type="text" id="state-input-edit" v-model="branch.state" />
+              </div>
+
+              <div class="input-one">
+                <label for="postcode-input">Postcode</label>
+                <input type="text" id="postcode-input-edit" v-model="branch.postcode" />
+              </div>
+
+              <div class="input-one">
+                <label for="phone-input">Phone Number</label>
+                <input type="tel" id="phone-input-edit" v-model="branch.phone" />
+              </div>
+
+              <div class="input-one">
+                <label for="email-input">Email Address</label>
+                <input type="email" id="email-input-edit" v-model="branch.email" />
+              </div>
+
+              <div class="submit-btn-cont" >
+                <button type="button" class="submit-btn"  onclick="closeModal('modal-2')" @click="updateBranch" >Update Branch</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div id="modal-3" class="modal">
+        <div class="modal-body small">
+          <div class="modal-header">
+            <h3>Edit User</h3>
+            <button type="button" onclick="closeModal()">&cross;</button>
+          </div>
+
+          <div class="modal-content ">
+            <form >
+
+              <div>
+                <label for="roles">Role:</label>
+                <select v-model="selectedValue" id="roles">
+                  <option v-for="option in options" :key="option" :value="option">
+                    {{ option }}
+                  </option>
+                </select>
+              </div>
+              <div class="submit-btn-cont" >
+                <button type="button" class="submit-btn"  @click="removeFromBranch" onclick="closeModal()">Remove From Branch</button>
+              </div>
+
+
+              <div class="submit-btn-cont" >
+                <button type="button" class="submit-btn"  @click="updateUser" onclick="closeModal()">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="modal-4" class="modal">
+        <div class="modal-body confirmation">
+          <div class="modal-header">
+            <h3>Delete</h3>
+            <button type="button" onclick="closeModal()">&cross;</button>
+          </div>
+
+
+
+          <div class="modal-content ">
+           <h3>Are you sure you want to proceed?</h3>
+           <div class="confirmation-cont">
+
+            <button type="button" class="submit-btn red"  @click="action" onclick="closeModal()">Yes</button>
+
+
+            <button type="button" class="submit-btn"   onclick="closeModal()">Cancel</button>
+
+          </div>
+        </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+      <div class="toast hide" id="toast">
+
+      </div>
+
+    <script src="javascripts/navigation.js"></script>
+    <script src="javascripts/header.js"></script>
+    <script src="javascripts/footer.js"></script>
+    <script src="javascripts/profile.js"></script>
+
+  </body>
+</html>

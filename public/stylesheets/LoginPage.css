@@ -1,0 +1,279 @@
+#login {
+  display: flex;
+  padding: 50px;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.login-container {
+  display: flex;
+
+  align-items: start;
+  justify-content: center;
+  width: 80%;
+  gap: 10%;
+}
+
+.login-section,
+.signup-section {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  height: 650px;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+
+  padding: 15px;
+  padding-top: 40px;
+  background: var(--background);
+  border-radius: var(--radius-border);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  background-color: white;
+  border: 1px solid var(--accent);
+
+  text-align: center;
+}
+.login-section {
+  gap: 30px;
+}
+.social-sign-in {
+  width: 90%;
+  box-sizing: border-box;
+
+  border-radius: 5px; /* Apply a slight curve to the buttons */
+
+  border: 1px solid var(--accent);
+  cursor: pointer;
+
+  padding: 10px 15px;
+  background-color: white;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 20px;
+}
+
+.social-sign-in > img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Options icon styles */
+.options-icon {
+  width: 30px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+input {
+  padding: 8px;
+  border-radius: 5px; /* Apply curved borders */
+  border: 1px solid var(--accent);
+  width: 80%; /* Make inputs take up full width */
+
+  box-sizing: border-box; /* Include padding and border in the total width */
+  font-size: 18px;
+}
+
+.line {
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 2px;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-section > form {
+  gap: 20px;
+}
+
+.signup-section > form {
+  gap: 10px;
+}
+
+form > button {
+  color: white;
+
+  border-radius: 20px; /* Apply a slight curve to the buttons */
+  background: var(--primary);
+  border: none;
+  cursor: pointer;
+  width: 100px;
+  padding: 10px 12px;
+  margin-top: 10px;
+}
+
+h1 {
+  margin: 0px;
+  font-size: 52px;
+  margin-bottom: 10px;
+}
+
+.additional-links {
+  text-align: cneter; /* Center the links horizontally */
+}
+
+.additional-links a {
+  text-decoration: none; /* Remove underline */
+  color: black;
+}
+
+.additional-links a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
+.divider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  box-sizing: border-box;
+  margin: 5px 0;
+}
+.divider > span {
+  border-bottom: 1px solid black;
+  height: 2px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.divider > .text {
+  color: black;
+  padding: 10px;
+  border: none;
+  box-sizing: border-box;
+  height: auto;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  /* Login and Sign Up sections */
+  .login-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .login-section,
+  .signup-section {
+    position: relative;
+    width: 80%; /* Set width of each section */
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    height: 400px;
+    /* width: 450px; */
+    box-sizing: border-box; /* Include padding and border in the total height/width */
+    text-align: center;
+  }
+
+  /* Options icon styles */
+  .options-icon {
+    width: 30px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    padding: 8px;
+    border-radius: 5px; /* Apply curved borders */
+    border: 1px solid #ccc; /* Add a border */
+    width: 100%; /* Make inputs take up full width */
+    margin-bottom: 10px; /* Add some spacing between inputs */
+    box-sizing: border-box; /* Include padding and border in the total width */
+    background: #e0ebfd;
+  }
+
+  select {
+    padding: 8px;
+    border-radius: 5px; /* Apply curved borders */
+    border: 1px solid #ccc; /* Add a border */
+    width: 100%; /* Make the select element take up full width */
+    margin-bottom: 10px; /* Add some spacing between inputs */
+    box-sizing: border-box; /* Include padding and border in the total width */
+    background: #e0ebfd;
+  }
+  .line {
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 2px;
+  }
+
+  .divider {
+    border-left: 1px solid #ccc;
+    height: 200px;
+  }
+
+  input,
+  select,
+  button {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  button {
+    color: white;
+    padding: 8px 16px; /* Reduce padding to make the buttons smaller */
+    border-radius: 5px; /* Apply a slight curve to the buttons */
+    background: #9b80ff;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 60px;
+  }
+
+  button:hover {
+    background-color: #555;
+  }
+
+  .additional-links {
+    margin-top: 20px;
+    text-align: left; /* Center the links horizontally */
+  }
+
+  .additional-links a {
+    color: white; /* Light grey color for the links */
+    text-decoration: none; /* Remove underline */
+  }
+
+  .additional-links a:hover {
+    text-decoration: underline; /* Add underline on hover */
+  }
+}
+
+/* Medium devices (landscape tablets, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 992px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+}

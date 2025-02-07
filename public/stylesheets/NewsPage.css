@@ -1,0 +1,161 @@
+#news {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  margin-bottom: 20px;
+  min-height: 90vh;
+}
+#news > h1 {
+  width: 80%;
+}
+
+.signed-in{
+  width: 80%;
+
+}
+.news-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 85%;
+  gap: 12px;
+  max-height:530px;
+  overflow-y:auto;
+}
+
+.news-container > div {
+  display: flex;
+  flex-direction: column;
+  width: 22vw;
+  height: 17vw;
+  background-color: white;
+  padding: 20px;
+  transition: all 0.4s;
+  border-radius: var(--radius-border);
+  border: 1px solid var(--accent);
+}
+.news-container > div:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.news-container > div > .date {
+  font-size: 14px;
+  color: black;
+}
+.news-container > div > .title {
+  margin-bottom: 10px;
+}
+.news-container > div > .preview {
+  color: black;
+}
+
+
+.btn-container {
+  width: 75%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 20px 0;
+}
+
+.create-button {
+  padding: 10px 12px;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10%;
+  border-radius: 20px;
+  color: white;
+  transition: all 0.4s;
+}
+
+.create-button:hover {
+  scale: 1.05;
+  cursor: pointer;
+}
+
+.edit-delete-btn-container {
+  display: flex;
+  gap:5px;
+}
+
+.edit-btn {
+  padding-top:20px;
+  border-width: 1px;
+  border-color: var(--primary);
+  padding: 5px 10px;
+  background: white;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width:40%;
+  color:var(--primary);
+  transition: all 0.4s;
+  border-radius: 20px;
+  align-self: flex-end;
+}
+
+.edit-btn:hover {
+  text-decoration: underline;
+  cursor:pointer;
+}
+
+.delete-btn {
+  padding-top:20px;
+  border-width: 1px;
+  border-color: rgb(194, 0, 0);
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  color:rgb(194, 0, 0);
+  padding: 5px 5px;
+  border-radius: 20px;
+  width:40%;
+  transition: all 0.4s;
+  align-self: flex-end;
+}
+
+.delete-btn:hover {
+  cursor:pointer;
+  text-decoration: underline;
+}
+
+.confirmation{
+  height: 200px !important;
+  width: 350px !important;
+}
+.confirmation-cont{
+  display: flex;
+  gap: 5px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-btn.red {
+  background-color: rgb(177, 0, 0);
+
+}
+
+.modal-content-news > h2 {
+  margin-bottom:0px;
+  margin-top:50px;
+  padding-right:40px;
+}
+
+.modal-content-news > #date_branch {
+ padding-left:50px;
+ margin-top:5px;
+ color:rgb(46, 46, 46);
+ font-size:14px;
+}
+
+.modal-content-news > #article-content {
+  padding-left:50px;
+  padding-top: 50px;
+  max-height:460px;
+  overflow-y:auto;
+  padding-right:60px;
+ }

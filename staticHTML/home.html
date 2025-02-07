@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BankFood</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <link rel="stylesheet" href="stylesheets/Modal.css" />
+
+
+    <script src="javascripts/Modal.js"></script>
+  </head>
+
+  <body >
+    <main id="main">
+      <section id="landing_header">
+        <h1 id="page_header">
+          <br />
+          Volunteer Today.
+        </h1>
+
+        <p id="page_description">
+          Join hundreds of volunteers across Australia to solve food poverty.
+          <br>
+          <br>
+          Every day, people struggle to access secure and safe sources of food. We at BankFood believe that no one should experience hunger and be subjected to such inequities.
+          When you join BankFood, you join a movement to make people's lives better by providing food for those in need.
+        </p>
+      </section>
+
+      <section>
+        <div id="options">
+          <div class="options_elem" v-if="auth" @click="goto('/events')">
+            <span>Your Events</span>
+            <img src="./images/1Alt.jpeg" alt="illustration" />
+          </div>
+          <div class="options_elem" v-if="!auth" @click="goto('/loginPage')">
+            <span>Join Us/Log In</span>
+            <img src="./images/1.png" alt="illustration" />
+          </div>
+          <div class="options_elem"  @click="goto('/findUs')">
+            <span>Find a branch near you</span>
+            <img src="./images/2.png" alt="illustration" />
+          </div>
+          <div class="options_elem" @click="goto('/news')">
+            <span>News and updates</span>
+            <img src="./images/3.png" alt="illustration" />
+          </div>
+          <div class="options_elem"  @click="goto('/faq')">
+            <span>FAQ's</span>
+            <img src="./images/4.png" alt="illustration" />
+          </div>
+        </div>
+      </section>
+
+      <section id="news_updates">
+        <div class="news_updates_header">
+          <h2>News & Updates</h2>
+          <a href="./news"> View all News here </a>
+        </div>
+        <div id="news_updates_scroller">
+          <div class="nu_items" v-for="(newsItem, index) in articles" :key="index" @click="openModal(index)">
+            <p id="date_time"></p>
+            <h1 class="nu_item">{{ newsItem.Name}}</h1>
+            <h2 class="nu_item">{{ newsItem.ArticleName }}</h2>
+            <p class="main-preview">{{newsItem.preview}}</p>
+          </div>
+        </div>
+      </section>
+
+      <div id="modal-1" class="modal">
+        <div class="modal-body">
+          <div class="modal-header">
+            <h3>News</h3>
+            <br>
+            <button type="button" onclick="closeModal()">&cross;</button>
+          </div>
+          <article>
+            <div class="modal-content-news">
+              <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+              <p id="date_branch"></p>
+              <p id="article-content">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+                luctus dui id lectus pretium lacinia. Duis aliquet enim vitae
+                sapien cursus dignissim. Mauris est turpis, finibus non erat
+                congue, porttitor consequat mi. Proin pulvinar sapien in lorem
+                egestas, ut ultricies mauris vehicula. Suspendisse urna tellus,
+                dapibus nec urna vel, egestas semper est. Pellentesque malesuada
+                odio odio, a molestie mauris aliquet id. Sed aliquam magna a neque
+                ornare, in fringilla ligula mattis. Suspendisse mollis eget magna
+                ac eleifend. Sed nisl sem, tincidunt sed luctus a, scelerisque at
+                diam. Nam lacus dui, ultricies ut purus eu, pellentesque congue
+                metus.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </main>
+    <script src="javascripts/navigation.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="javascripts/index.js"></script>
+    <script src="./javascripts/header.js"></script>
+    <script src="./javascripts/footer.js"></script>
+  </body>
+</html>

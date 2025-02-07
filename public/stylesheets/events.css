@@ -1,0 +1,272 @@
+:root {
+  --primary: #1848a8;
+  --accent: #cccccc;
+  --radius-border: 8px;
+}
+
+#events {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  flex-direction: row;
+  padding: 20px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.events-container {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.events-container > h1 {
+  margin-top: 0;
+}
+
+.event-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 8px;
+}
+
+.event-container > div {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  height: 19vw;
+  background-color: white;
+  padding: 20px;
+  transition: all 0.4s;
+  border-radius: var(--radius-border);
+  border: 1px solid var(--accent);
+  align-items: start;
+  justify-content: start;
+  overflow-y: scroll;
+}
+
+.event-container > div:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.event-container > div > .date {
+  font-size: 14px;
+  color: black;
+}
+
+.event-container > div > .title {
+  margin-bottom: 10px;
+}
+
+.event-container > div > .preview {
+  color: black;
+}
+
+.rsvp-container {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  border-left: 1px solid var(--primary);
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.rsvp-container > h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.rsvp-container > div {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: auto;
+  width: 100%;
+  background-color: white;
+  border-radius: var(--radius-border);
+  border: 1px solid var(--accent);
+  margin-bottom: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.rsvp-container > div > .date-time {
+  font-size: 14px;
+  color: black;
+}
+
+.rsvp-container > div > h3 {
+  margin-top: 5px;
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+.rsvp-container > div > .delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  background: black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.rsvp-container > div > .delete > img {
+  width: 15px;
+  height: 15px;
+  filter: invert(1);
+}
+
+.rsvp-button {
+  display: flex;
+  padding: 10px 15px;
+  border-radius: var(--radius-border);
+  border: 2px solid var(--primary);
+  align-items: center;
+  gap: 5px;
+  align-self: start;
+  justify-self: start;
+  color: black;
+  transition: all 0.4s;
+}
+
+.rsvp-button:hover {
+  transform: scale(1.01);
+  cursor: pointer;
+}
+
+.rsvp-button input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.rsvp-button input:checked ~ svg > .button-indicator {
+  fill: green;
+}
+
+.btn-container {
+  width: 75%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edit-button {
+  padding: 10px 12px;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  border-radius: 20px;
+  color: white;
+  transition: all 0.4s;
+}
+
+.edit-button:hover {
+  scale: 1.05;
+  cursor: pointer;
+}
+
+.create-button {
+  padding: 10px 12px;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  border-radius: 20px;
+  color: white;
+  transition: all 0.4s;
+}
+
+.create-button:hover {
+  scale: 1.05;
+  cursor: pointer;
+}
+
+/* Adjustments for user events container */
+.rsvp-container {
+  margin-top: 20px;
+}
+
+.rsvp-container h2 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+#user-events {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#user-events:empty::before {
+  content: ''; /* Hide the empty state */
+}
+
+#user-events:empty + .rsvp-container {
+  display: none;
+}
+
+.rsvp-container .event {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: var(--radius-border);
+  border: 1px solid var(--accent);
+  transition: all 0.3s;
+  align-items: center;
+}
+
+.rsvp-container .event:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rsvp-container .event h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+.rsvp-container .event .date-time,
+.rsvp-container .event .description {
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.rsvp-container .event .delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  background: black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.rsvp-container .event .delete img {
+  width: 12px;
+  height: 12px;
+  filter: invert(1);
+}

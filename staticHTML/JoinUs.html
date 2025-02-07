@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="stylesheets/style.css" />
+  <link rel="stylesheet" href="stylesheets/JoinUs.css" />
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <main id="join-us">
+    <div>
+      <h1>Become a volunteer</h1>
+      <p>
+        BankFood has one main goal: to fight food poverty. Each of our
+        branches relies on many people who give their time and effort to help
+        others. Without their help, we would not be able to provide good
+        quality food to the people who need it most.
+      </p>
+      <p>
+        To help more people, we need more volunteers! Become a volunteer at
+        one of our branches and find the joy in helping communities to thrive
+        better.
+      </p>
+    </div>
+    <div>
+      <div class="state-buttons">
+        <button
+          type="button"
+          class="state-btn"
+          :class="{ active: filter === 'ALL' }"
+          @click="filterCards('ALL')"
+        >
+          All
+        </button>
+        <button
+          type="button"
+          class="state-btn"
+          :class="{ active: filter === 'SA' }"
+          @click="filterCards('SA')"
+        >
+          SA
+        </button>
+        <button
+          type="button"
+          class="state-btn"
+          :class="{ active: filter === 'VIC' }"
+          @click="filterCards('VIC')"
+        >
+          VIC
+        </button>
+        <button
+          type="button"
+          class="state-btn"
+          :class="{ active: filter === 'NSW' }"
+          @click="filterCards('NSW')"
+        >
+          NSW
+        </button>
+        <button
+          type="button"
+          class="state-btn"
+          :class="{ active: filter === 'QLD' }"
+          @click="filterCards('QLD')"
+        >
+          QLD
+        </button>
+        <button
+          type="button"
+          class="state-btn"
+          :class="{ active: filter === 'WA' }"
+          @click="filterCards('WA')"
+        >
+          WA
+        </button>
+      </div>
+    </div>
+    <div class="cards">
+      <div
+        v-for="branch in filteredBranches"
+        :key="branch.Name"
+        class="card"
+        :data-state="branch.State"
+
+      >
+        <div class="card-head">
+          <h2>{{ branch.Name }}</h2>
+        </div>
+        <div class="card-content">
+          <p>{{ branch.HouseNumber+ " "+branch.StreetName +" "+ branch.City +" "+branch.Postcode  }}</p>
+          <p>
+            <strong>Phone:</strong>
+            <a :href="'tel:' + branch.phone">{{ branch.PhoneNumber }}</a>
+          </p>
+          <p>
+            <strong>Email:</strong>
+            <a :href="'mailto:' + branch.email">{{ branch.EmailAddress}}</a>
+          </p>
+          <button type="button" class="join-btn"  :class="{ joined: branch.BranchID === joinedBranchID }"  @click="joinBranch(branch.BranchID)">
+            {{ branch.BranchID === joinedBranchID ? 'Joined' : 'Join Now' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="javascripts/JoinUs.js"></script>
+  <script src="javascripts/navigation.js"></script>
+  <script src="javascripts/header.js"></script>
+  <script src="javascripts/footer.js"></script>
+  <script src="javascripts/app.js"></script>
+</body>
+</html>

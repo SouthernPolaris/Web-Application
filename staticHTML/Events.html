@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events</title>
+  <script src="javascripts/Modal.js"></script>
+  <script src="javascripts/events.js" defer></script>
+  <link rel="stylesheet" href="stylesheets/style.css" />
+  <link rel="stylesheet" href="stylesheets/events.css" />
+  <link rel="stylesheet" href="stylesheets/Modal.css" />
+</head>
+<body>
+  <main id="events">
+    <div class="events-container">
+      <div class="btn-container">
+        <h1>Events for you</h1>
+        <button type="button" style="display:none;" id="create-event-button" class="create-button" onclick="openModal('modal-2')">Create Event</button>
+        <button type="button" style="display:none;" id="edit-event-button" class="edit-button" onclick="openModal('modal-3')">Edit Event</button>
+      </div>
+      <div id="event-container" class="event-container">
+        <!-- Events will be dynamically inserted here -->
+      </div>
+    </div>
+    <div class="rsvp-container">
+      <h2>Your Events</h2>
+      <div id="user-events">
+        <!-- User events will be dynamically inserted here -->
+        <!-- Example of a user event -->
+        <div class="event">
+          <div class="event-info">
+            <h3>Event Title</h3>
+            <div class="date-time">Date: 2024-06-13T00:00:00.000Z</div>
+            <div class="date-time">Time: 12:00 - 12:00</div>
+          </div>
+          <div class="rsvp-container">
+            <label class="rsvp-button">
+              <input type="checkbox" />
+              <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M26 13C26 19.5922 20.4395 25 13.5 25C6.56053 25 1 19.5922 1 13C1 6.40782 6.56053 1 13.5 1C20.4395 1 26 6.40782 26 13Z" fill="white" stroke="#1848A8" stroke-width="2" class="button-indicator" />
+              </svg>
+              RSVP
+            </label>
+            <div class="delete" onclick="deleteEvent(this)">
+              <img src="images/trashcan.png" alt="Delete Event">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div id="modal-1" class="modal">
+    <div class="modal-body">
+      <div class="modal-header">
+        <h3>Event Details</h3>
+        <button type="button" onclick="closeModal('modal-1')">&cross;</button>
+      </div>
+      <img src="images/placeholder-events.png" alt="event picture" />
+      <div class="modal-content">
+        <h2>Event Name</h2>
+        <h3>date|time</h3>
+        <h3>Location: Glenelg Beach</h3>
+        <p>
+          Text textText textText textText textText textText textText textText textText textText text Text textText textText textText textText textText textText textText text Text textText textText textText textText textText textText textText text
+        </p>
+        <label class="rsvp-button">
+          <input type="checkbox" />
+          <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M26 13C26 19.5922 20.4395 25 13.5 25C6.56053 25 1 19.5922 1 13C1 6.40782 6.56053 1 13.5 1C20.4395 1 26 6.40782 26 13Z" fill="white" stroke="#1848A8" stroke-width="2" class="button-indicator" />
+          </svg>
+          RSVP
+        </label>
+
+      </div>
+    </div>
+  </div>
+  <div id="modal-2" class="modal">
+    <div class="modal-body extra">
+      <div class="modal-header">
+        <h3>Event</h3>
+        <button type="button" onclick="closeModal('modal-2')">&cross;</button>
+      </div>
+      <div class="modal-content">
+        <form>
+          <div class="input-one">
+            <label>Title</label>
+            <input type="text" id="title-input" />
+          </div>
+          <div class="input-one">
+            <label>Date</label>
+            <input type="date" id="date-input" />
+          </div>
+          <div class="input-one">
+            <label>Time Start:</label>
+            <input type="time" id="start-input" />
+          </div>
+          <div class="input-one">
+            <label>Time End</label>
+            <input type="time" id="end-input" />
+          </div>
+
+          <div class="input-one">
+            <label>Address 1</label>
+            <input type="text" id="address-input" />
+          </div>
+
+          <div class="input-one">
+            <label for="address-input">Address 2</label>
+            <input type="text" id="address-input-edit" v-model="branch.address" />
+          </div>
+
+          <div class="input-one">
+            <label for="city-input">City</label>
+            <input type="text" id="city-input-edit" v-model="branch.city" />
+          </div>
+
+          <div class="input-one">
+            <label for="state-input">State</label>
+            <input type="text" id="state-input-edit" v-model="branch.state" />
+          </div>
+
+          <div class="input-one">
+            <label for="postcode-input">Postcode</label>
+            <input type="text" id="postcode-input-edit" v-model="branch.postcode" />
+          </div>
+
+
+          <div class="body-input">
+            <label>Event Description</label>
+            <textarea id="body-input-event" placeholder="Description here"></textarea>
+          </div>
+          <div class="submit-btn-cont">
+            <button type="button" class="submit-btn" onclick="publishAndClose()">Publish Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-3" class="modal">
+    <div class="modal-body extra">
+      <div class="modal-header">
+        <h3>Event</h3>
+        <button type="button" onclick="closeModal('modal-3')">&cross;</button>
+      </div>
+      <div class="modal-content ">
+        <form>
+
+          <div class="input-one">
+            <label>Enter ID to Find</label>
+            <input type="text" id="id-input" />
+          </div>
+          <div class="input-one">
+            <label>Title</label>
+            <input type="text" id="title" />
+          </div>
+          <div class="input-one">
+            <label>Date</label>
+            <input type="date" id="date" />
+          </div>
+          <div class="input-one">
+            <label>Time Start:</label>
+            <input type="time" id="start" />
+          </div>
+          <div class="input-one">
+            <label>Time End</label>
+            <input type="time" id="end" />
+          </div>
+
+          <div class="input-one">
+            <label>Address 1</label>
+            <input type="text" id="address" />
+          </div>
+
+          <div class="input-one">
+            <label for="address-input">Address 2</label>
+            <input type="text" id="address-edit" v-model="branch.address" />
+          </div>
+
+          <div class="input-one">
+            <label for="city-input">City</label>
+            <input type="text" id="city-edit" v-model="branch.city" />
+          </div>
+
+          <div class="input-one">
+            <label for="state-input">State</label>
+            <input type="text" id="state-edit" v-model="branch.state" />
+          </div>
+
+          <div class="input-one">
+            <label for="postcode-input">Postcode</label>
+            <input type="text" id="postcode-edit" v-model="branch.postcode" />
+          </div>
+
+
+          <div class="body-input">
+            <label>Event Description</label>
+            <textarea id="body-event" placeholder="Description here"></textarea>
+          </div>
+          <div class="submit-btn-cont">
+            <button type="button" class="submit-btn" onclick="EditAndClose()">Publish Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="javascripts/navigation.js"></script>
+  <script src="javascripts/header.js"></script>
+  <script src="javascripts/footer.js"></script>
+</body>
+</html>

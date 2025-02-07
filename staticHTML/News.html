@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News and Updates</title>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script src="javascripts/Modal.js"></script>
+
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <link rel="stylesheet" href="stylesheets/NewsPage.css" />
+    <link rel="stylesheet" href="stylesheets/Modal.css" />
+  </head>
+  <body >
+    <div id="news-app">
+    <main id="news">
+
+      <div class="btn-container">
+
+        <button
+          type="button"
+          class="create-button"
+          onclick="openModal('modal-2')"
+          v-if="role === 'admin'||role==='manager'"
+
+        >
+          Create Article
+        </button>
+      </div>
+      <div class="signed-in" v-if="branch">
+      <h1>Updates for your branch</h1>
+
+
+
+      <div class="news-container" id="private">
+          <div v-for="article in branchArticles" :key="article.ArticleId" @click="openModal('modal-1', article.date, article.ArticleName, article.ArticleContent, article.Name, false)">
+            <article>
+              <span class="date">{{ article.date }}</span>
+              <h3 class="title">{{ article.ArticleName }}</h3>
+              <p class="preview">{{ article.preview }}</p>
+            </article>
+            <span class="date"> Click for full article </span>
+            <div class="edit-delete-btn-container">
+              <button
+              v-if="role === 'admin'||role==='manager'"
+                type="button"
+                class="edit-btn"
+                @click.stop="openModal('modal-2', article.date, article.ArticleName, article.ArticleContent, article.Name, true,article.ArticleId)"
+              >
+                Edit Article
+              </button>
+              <button
+              v-if="role === 'admin'||role==='manager'"
+                type="button"
+                class="delete-btn"
+                @click.stop="confirmDelete(article.ArticleId)"
+              >
+                Delete Article
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+      <h1>Updates from <span v-if="branch">other</span> branches</h1>
+
+      <div class="news-container" id="public">
+        <div v-for="article in articles" :key="article.ArticleId" @click="openModal('modal-1', article.date, article.ArticleName, article.ArticleContent, article.Name, false)">
+           <article>
+             <span class="date">{{ article.date }}</span>
+             <h3 class="title">{{ article.ArticleName }}</h3>
+             <p class="preview">{{ article.preview }}</p>
+           </article>
+           <span class="date"> Click for full article </span>
+           <div class="edit-delete-btn-container">
+             <button
+             v-if="role === 'admin'||role==='manager'"
+               type="button"
+               class="edit-btn"
+               @click.stop="openModal('modal-2', article.date, article.ArticleName, article.ArticleContent, article.Name, true,article.ArticleId)"
+             >
+               Edit Article
+             </button>
+             <button
+             v-if="role === 'admin'||role==='manager'"
+               type="button"
+               class="delete-btn"
+               @click.stop="confirmDelete(article.ArticleId)"
+             >
+               Delete Article
+             </button>
+           </div>
+
+
+
+        </div>
+
+      </div>
+
+    </main>
+
+    <div id="modal-1" class="modal">
+      <div class="modal-body">
+        <div class="modal-header">
+          <h3>News</h3>
+          <br>
+          <button type="button" onclick="closeModal()">&cross;</button>
+        </div>
+        <article>
+          <div class="modal-content-news">
+            <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+            <p id="date_branch"></p>
+            <p id="article-content">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+              luctus dui id lectus pretium lacinia. Duis aliquet enim vitae
+              sapien cursus dignissim. Mauris est turpis, finibus non erat
+              congue, porttitor consequat mi. Proin pulvinar sapien in lorem
+              egestas, ut ultricies mauris vehicula. Suspendisse urna tellus,
+              dapibus nec urna vel, egestas semper est. Pellentesque malesuada
+              odio odio, a molestie mauris aliquet id. Sed aliquam magna a neque
+              ornare, in fringilla ligula mattis. Suspendisse mollis eget magna
+              ac eleifend. Sed nisl sem, tincidunt sed luctus a, scelerisque at
+              diam. Nam lacus dui, ultricies ut purus eu, pellentesque congue
+              metus.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div id="modal-2" class="modal">
+      <div class="modal-body">
+        <div class="modal-header">
+          <h3>Edit Article</h3> <br>
+          <button type="button" onclick="closeModal()">&cross;</button>
+        </div>
+
+        <div class="modal-content">
+          <form id="edit-form">
+
+          <div class="input-one">
+            <label> Title</label>
+            <input type="text" id="title-input" />
+
+          </div>
+          <div class="body-input">
+            <label>Content</label>
+
+            <textarea  id="body-input-news" placeholder="Article here"></textarea>
+
+          </div>
+          <div class="submit-btn-cont">
+          <button type="submit" class="submit-btn" id="post-publicly" >
+            Post to Public
+          </button>
+          <button type="submit" class="submit-btn" id='post-privately'>
+            Post to members
+          </button>
+        </div>
+        </form>
+
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-4" class="modal">
+      <div class="modal-body confirmation">
+        <div class="modal-header">
+          <h3>Delete</h3>
+
+          <button type="button" onclick="closeModal()">&cross;</button>
+
+        </div>
+
+        <div class="modal-content">
+
+         <h3>Are you sure you want to delete this article?</h3>
+
+         <div class="confirmation-cont">
+
+          <button type="button" class="submit-btn red" @click="deleteArticle">Yes, Delete</button>
+          <button type="button" class="submit-btn"  @click="cancelDelete">No, go back!</button>
+
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+    <script src="javascripts/navigation.js"></script>
+    <script src="javascripts/header.js"></script>
+
+    <script src="javascripts/news.js"></script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,321 @@
+#profile {
+  display: flex;
+  width: 100%;
+  min-height: 80vh;
+
+}
+.active {
+  display: flex;
+}
+
+.nav-bar {
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+  border-right: 1px solid var(--primary);
+
+  align-items: start;
+  justify-content: start;
+}
+.nav-bar > a {
+  color: black;
+}
+.nav-item:hover {
+  background-color: var(--accent);
+}
+.active-nav {
+  background-color: var(--primary);
+  color: white !important;
+}
+.nav-item {
+  width: 100%;
+
+  border-bottom: 1px solid var(--primary);
+  height: 70px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s;
+}
+
+main > div {
+  display: none;
+}
+
+.nav-item > span {
+  padding: 20px;
+  width: 75%;
+}
+
+.first-nav-item {
+  margin-top: 200px;
+  border-top: 1px solid var(--primary);
+}
+
+.profile {
+  width: 85%;
+  height: 100%;
+}
+
+.personal-container {
+  flex-direction: column;
+  padding: 50px;
+}
+.personal {
+  display: flex;
+  width: 100%;
+  flex-direction: row !important;
+
+  gap: 40px;
+}
+h1,
+h2 {
+  margin-top: 0;
+}
+.personal > .form {
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  color: black;
+  height: 450px;
+  border-radius: var(--radius-border);
+  border: 1px solid var(--accent);
+  padding: 30px;
+  box-sizing: border-box;
+  gap: 30px;
+}
+.personal > .form > label {
+  font-size: 40px;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.personal > .form > div {
+  width: 100%;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+}
+
+.personal > .form > div > label {
+  width: 40%;
+  font-size: 24px;
+}
+
+.personal > .form > div > input {
+  border-radius: 15px;
+  width: 60%;
+  background-color: #d9d9d9;
+  border: 0px;
+}
+
+.personal > .form > button,.submit {
+  padding: 10px 15px;
+  border-radius: var(--radius-border);
+  background-color: var(--primary);
+  width: 30%;
+  color: white;
+  border: 0;
+  align-self: center;
+
+}
+.personal > .form > button:hover,.submit:hover {
+  cursor: pointer;
+}
+.red{
+  background-color: red  !important;
+}
+
+.personal > .form > button:hover {
+  cursor:pointer;
+  text-decoration: underline;
+}
+
+.personal > div {
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  color: black;
+  height: 450px;
+  border-radius: var(--radius-border);
+  border: 1px solid var(--accent);
+  padding: 30px;
+  box-sizing: border-box;
+  gap: 30px;
+}
+.personal > div > h2 {
+  font-size: 40px;
+}
+
+.manage-user,
+.manage-branch {
+  flex-direction: column;
+  padding: 50px;
+  gap: 40px;
+}
+
+.search-input {
+  width: 40%;
+  padding: 10px 40px 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  outline: none;
+  font-size: 16px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 80%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  color: black;
+  border-radius: var(--radius-border);
+}
+th,
+td {
+  padding: 12px;
+  text-align: left;
+}
+
+tr > td {
+  border-right: 1px solid var(--accent);
+}
+tr:last-child {
+  border-right: none !important;
+}
+tbody tr:last-child > td {
+  border-bottom: none;
+}
+
+tbody tr td:last-child {
+  border-right: none;
+}
+
+th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 20px;
+}
+
+.edit-btn {
+  background-color: #6c8ff5;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #f56c6c;
+  color: white;
+}
+
+.manage-branch > div {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+}
+
+.manage-branch > div > button {
+  padding: 10px 15px;
+  border-radius: 20px;
+  background-color: var(--primary);
+  color: white;
+  transition: all 0.4s;
+}
+.manage-branch > div > button:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.email-pref {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.email-pref > div {
+  display: flex;
+  gap: 20px;
+}
+
+/* Hide the default checkbox */
+.email-pref input[type="checkbox"] {
+  display: none;
+}
+
+/* Style the custom checkbox */
+.email-pref input[type="checkbox"] + label {
+  position: relative;
+  padding-left: 30px; /* Adjust the spacing between the checkbox and label */
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Create the visual representation of the custom checkbox */
+.email-pref input[type="checkbox"] + label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px; /* Adjust the size of the checkbox */
+  height: 20px; /* Adjust the size of the checkbox */
+  border: 2px solid #333;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+/* Style the custom checkbox when checked */
+.email-pref input[type="checkbox"]:checked + label:before {
+  background-color: #333;
+}
+
+/* Style the checkmark inside the custom checkbox */
+.email-pref input[type="checkbox"] + label:after {
+  content: "\2713"; /* Unicode checkmark character */
+  position: absolute;
+  left: 4px;
+  top: 2px;
+  font-size: 14px; /* Adjust the size of the checkmark */
+  color: #fff;
+  opacity: 0; /* Initially hide the checkmark */
+  transition: opacity 0.2s ease; /* Add transition effect */
+}
+
+/* Show the checkmark when the custom checkbox is checked */
+.email-pref input[type="checkbox"]:checked + label:after {
+  opacity: 1;
+}
+
+.wrapper{
+  display: flex;
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 35%; /* Adjust based on padding and input size */
+  transform: translateY(-50%);
+
+  background: none;
+  border: none;
+ z-index: 50;
+}
+
+.search-icon:hover{
+  cursor: pointer;
+ 
+}

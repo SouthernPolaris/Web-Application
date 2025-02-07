@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find Us Page</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/FindUs.css" />
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
+  />
+
+  <script src="https://unpkg.com/leaflet-geosearch@latest/dist/bundle.min.js"></script>
+  </head>
+
+  <body onload="getBranches()">
+    <main id="find-us">
+      <h1>Find a branch near you</h1>
+      <p>
+        BankFood branches are mostly location based, and although our teams are
+        focused on different locations, we’re all working towards the same goal
+        — fighting food poverty.
+        <br />
+        <br />
+        Find a branch near you and get started with your volunteering journey
+        today!
+      </p>
+
+      <input type="text" class="search-input" placeholder="Enter Your Address" />
+      <button type="button" onclick="validate()">Enter Here</button>
+      <div>
+        <div id="possible-locations">
+          <div data-location="1">
+            <p>Headquarters</p>
+            <p id="address">University of Adelaide, North Terrace, Adelaide, South Australia, 5000, Australia</p>
+            <p>-- km away</p>
+          </div>
+          <br>
+          <div data-location="1">
+            <p>Site 1</p>
+            <p>[INSERT LOCATION HERE]</p>
+            <p>-- km away</p>
+          </div>
+        </div>
+        <div id="map"></div>
+      </div>
+    </main>
+    <script src="./javascripts/maps.js"></script>
+    <script src="./javascripts/branch.js"></script>
+
+    <script src="javascripts/navigation.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./javascripts/header.js"></script>
+    <script src="./javascripts/footer.js"></script>
+  </body>
+</html>
